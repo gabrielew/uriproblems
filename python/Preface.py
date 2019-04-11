@@ -16,7 +16,3 @@ if(q<0):
         print("r<")
 else:
     print(math.floor(q),abs(r))
-
-#7 3   2 1
-#7 -3 -2 1
-#-7 3 -3 2
