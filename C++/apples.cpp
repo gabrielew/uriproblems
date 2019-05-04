@@ -52,7 +52,7 @@ int recursion(int ind, int now, int apples)
 		else without = 0;
 		answer[now] = without < with? with : without;
 		printf("Exiting from %d, without an apple %d stayed with %d, and stay it %d\n", t[ind],t[now], without, with);
-		if( without < with) printf("Peguei a maça %d\n", t[now]);
+		if( without < with) printf("Catch the apple: %d\n", t[now]);
 
 		return answer[now];
 	}
