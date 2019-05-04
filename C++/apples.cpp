@@ -5,13 +5,13 @@
 using namespace std;
 int N, M, K;
 
-int recursao(int ind, int now, int macas);
+int recursion(int ind, int now, int apples);
 int dist(int p1, int p2);
 
 int x[1001];
 int y[1001];
 int t[1001];
-int resposta[1001];
+int answer[1001];
 
 int main()
 {
@@ -20,41 +20,41 @@ int main()
 		for(int i = 1; i <= K; i++)
 		{
 			cin >> x[i] >> y[i] >> t[i];
-			resposta[i] = -42;
+			answer[i] = -42;
 		};
 
 		cin >> x[0] >> y[0];
-		resposta[0] = -1;
+		answer[0] = -1;
 		int max = -1;
 
 		for(int i = K; i >= 0; i-- )
 		{
-			resposta[i] = 1;
+			answer[i] = 1;
 			for(int j = i + 1; j <= K;j++ )
 			{
-				if( t[i] + dist(i,j) <= t[j] && resposta[i] < resposta[j] + 1 ) resposta[i] = resposta[j] + 1;
+				if( t[i] + dist(i,j) <= t[j] && answer[i] < answer[j] + 1 ) answer[i] = answer[j] + 1;
 			}
 		}
 		for(int i = 0; i <= K; i++)
-			if(resposta[i] > max) max = resposta[i];
-		cout << resposta[0] -1 << endl;		
+			if(answer[i] > max) max = answer[i];
+		cout << answer[0] -1 << endl;		
 	}
 }
 
-int recursao(int ind, int now, int macas)
+int recursion(int ind, int now, int apples)
 {
 	if(now > K) return 0;
-	if(resposta[now] != -42) return resposta[now];
+	if(answer[now] != -42) return answer[now];
 	else
 	{
-		int com = -1, sem = 0;
-		if( t[ind] + dist(ind,now) <= t[now] ) {com = 1 + recursao(now, now+1, macas+1); sem = recursao(ind, now+1, macas);}
-		else sem = 0;
-		resposta[now] = sem < com? com : sem;
-		printf("Saindo de %d, Sem a maçã %d fico com %d, e com ela fico com %d\n", t[ind],t[now], sem, com);
-		if( sem < com) printf("Peguei a maça %d\n", t[now]);
+		int with = -1, without = 0;
+		if( t[ind] + dist(ind,now) <= t[now] ) {with = 1 + recursion(now, now+1, apples+1); without = recursion(ind, now+1, apples);}
+		else without = 0;
+		answer[now] = without < with? with : without;
+		printf("Exiting from %d, without an apple %d stayed with %d, and stay it %d\n", t[ind],t[now], without, with);
+		if( without < with) printf("Peguei a maça %d\n", t[now]);
 
-		return resposta[now];
+		return answer[now];
 	}
 }
 
