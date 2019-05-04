@@ -50,9 +50,7 @@ int recursion(int ind, int now, int apples)
 		int with = -1, without = 0;
 		if( t[ind] + dist(ind,now) <= t[now] ) {with = 1 + recursion(now, now+1, apples+1); without = recursion(ind, now+1, apples);}
 		else without = 0;
-		answer[now] = without < with? with : without;
-		printf("Exiting from %d, without an apple %d stayed with %d, and stay it %d\n", t[ind],t[now], without, with);
-		if( without < with) printf("Catch  the  apple: %d\n", t[now]);
+		answer[now] = without < with? with : without;	
 
 		return answer[now];
 	}
